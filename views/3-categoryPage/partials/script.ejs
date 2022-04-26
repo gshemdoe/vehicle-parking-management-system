@@ -1,0 +1,28 @@
+<script>
+    //convert html collections to array
+    const categoryRow = Array.from(document.getElementsByClassName('categoryRow'))
+
+    function searchCat() {
+        let input = document.getElementById('sInput').value
+        categoryRow.forEach(cat => {
+            if(cat.innerText.toLowerCase().includes(input.toLowerCase())) {
+                cat.style.display = 'table-row'
+            } else {
+                cat.style.display = 'none'
+            }
+        })
+    }
+
+    function editCat(e) {
+        let editFormAction = document.getElementById('edit-category-form')
+        editFormAction.action = `edit-category/${e}`
+    }
+
+    function deleteCat(e) {
+        let confirmation = confirm('Click "OK" to delete this category or "Cancel" to abort')
+
+        if(confirmation == true) {
+            window.open(`/deletecat/${e}`, '_self')
+        }
+    }
+</script>

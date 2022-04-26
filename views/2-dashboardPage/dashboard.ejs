@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fontawesome-free-6.1.1-web/css/all.min.css">
+    <title>Dashboard</title>
+    <%- include('./partials/style.ejs'); %>
+        <%- include('../a-global/style.ejs'); %>
+</head>
+
+<body>
+    <%- include('../a-global/header'); %>
+        <div class="main">
+            <%- include('../a-global/sidebar'); %>
+
+                <div class="right" style="color: white;">
+                    <div class="nav">
+                        <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>Dashboard</span>
+                    </div>
+                    <div class="greeting">
+                        Hello!, Administrator
+                    </div>
+                    <div class="stats">
+                        <div class="div1st cparked">
+                            <i class="fa-solid fa-car"></i>
+                            <h1 class="numparked">
+                                20
+                            </h1>
+                            <span class="titleparked title">
+                                Total Vehicles Parked
+                            </span>
+                        </div>
+                        <div class="div1st cin">
+                            <i class="fa-solid fa-circle-arrow-down"></i>
+                            <h1 class="numin">
+                                20
+                            </h1>
+                            <span class="titlein title">
+                                Vehicles In
+                            </span>
+                        </div>
+                        <div class="div1st cout">
+                            <i class="fa-solid fa-circle-arrow-up"></i>
+                            <h1 class="numout">
+                                20
+                            </h1>
+                            <span class="titleout title">
+                                Vehicles Out
+                            </span>
+                        </div>
+                        <div class="div1st done24">
+                            <i class="fa-solid fa-business-time"></i>
+                            <h1 class="numdone">
+                                20
+                            </h1>
+                            <span class="titledone title">
+                                Parking Done Within 24hrs
+                            </span>
+                        </div>
+                    </div>
+                    <!-- &&&&&&&&&& -->
+                    <div class="highlights">
+                        <span class="title">
+                           Highlights - IN | OUT
+                        </span>
+                        <div class="pie">
+                            <div class="indicator">
+                               <span class="indin"></span> In
+                               <span class="indout"></span> Out
+                            </div>
+                            <div class="pierec">
+                               <section class="green">
+                                   <span class="hideG">75 Vehicles 75%</span>
+                                </section>
+                               <section class="red">
+                                   <span class="hideR">25 Vehicles 25%</span>
+                               </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <%- include('../a-global/script'); %>
+</body>
+
+</html>

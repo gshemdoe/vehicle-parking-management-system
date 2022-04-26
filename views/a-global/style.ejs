@@ -1,0 +1,195 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Acme&family=Caveat&family=Hurricane&family=Palette+Mosaic&family=Smokum&family=Ultra&display=swap');
+
+    *,
+    *::after,
+    *::before {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background-color: black;
+        color: white;
+        min-width: 1024px;
+    }
+
+    header {
+        background-color: gold;
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 4px;
+        z-index: 99;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    header .title {
+        cursor: pointer;
+    }
+
+    header .title span {
+        font-family: 'Ultra', fantasy;
+        border: black solid 2px;
+        padding: 6px 4px;
+        font-size: x-large;
+    }
+
+    header .vehicle {
+        color: gold;
+        background-color: black;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+
+    header .parking {
+        color: black;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    header .profile {
+        position: relative;
+    }
+
+    header .profile i {
+        font-size: xx-large;
+        color: black;
+        margin-right: 8px;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    header .profile:hover .pmodal {
+        display: block;
+        z-index: 999;
+    }
+
+    header .profile .pmodal {
+        display: none;
+        position: fixed;
+        background-color: brown;
+        color: white;
+        font-family: 'Acme', fantasy;
+        font-size: medium;
+        width: fit-content;
+        right: 8px;
+        padding-right: 12px;
+        border-radius: 6px;
+    }
+
+    header .profile .pmodal ul {
+        list-style: none;
+    }
+
+    header .profile .pmodal ul li {
+        margin-left: -12px;
+        border-bottom: 1px black solid;
+        line-height: 36px;
+        cursor: pointer;
+    }
+
+    header .profile .pmodal i {
+        font-size: medium;
+        color: white;
+    }
+
+    /* sidebar */
+
+    .sidebar {
+        width: 20%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background-color: white;
+        color: black;
+        padding-top: 100px;
+    }
+
+    .sidebar .admin {
+        display: flex;
+        border-bottom: 2px lightgray solid;
+    }
+
+    .sidebar .admin div {
+        font-size: large;
+        font-family: 'Acme', fantasy;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar .pic {
+        margin-right: 12px;
+    }
+
+    .sidebar .pic img {
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+    }
+
+    .sidebar .admin .maneno {
+        flex-direction: column;
+    }
+
+    .sidebar .admin .maneno span {
+        display: block;
+    }
+
+    .sidebar .admin .maneno .title {
+        font-size: x-large;
+    }
+
+    .sidebar .admin .maneno .stts {
+        color: gray;
+        font-family: fantasy;
+    }
+
+    .sidebar .admin .maneno .green {
+        height: 12px;
+        width: 12px;
+        border-radius: 50%;
+        background-color: lightgreen;
+        display: inline-block;
+    }
+
+    .sidebar .routes div {
+        margin-top: 8px;
+        font-size: larger;
+        font-family: 'Acme', fantasy;
+        cursor: pointer;
+        padding: 12px;
+    }
+
+    .sidebar .routes div:hover {
+        background-color: brown;
+        color: white;
+    }
+
+    .main {
+        padding-top: 78px;
+        position: relative;
+    }
+
+    .main .right {
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 20%;
+    }
+
+    .main .right .nav {
+        background-color: white;
+        color: black;
+        padding: 8px 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .main .right .nav i {
+        cursor: pointer;
+    }
+</style>
