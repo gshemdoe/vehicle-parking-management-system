@@ -5,17 +5,18 @@
         </div>
         <div class="maneno">
             <span class="title">Admin</span>
-            <span class="stts"><span class="green"></span> Online</span>
+            <span class="stts"><span class="green"></span> online</span>
         </div>
     </div>
+    <br><br>
     <div class="routes">
             <div class="dash"><i class="fa-solid fa-gauge"></i> Dashboard</div>
-            <div class="cat"><i class="fa-solid fa-list-check"></i> Vehicle category</div>
+            <div class="cat"><i class="fa-solid fa-folder-tree"></i> Vehicle category</div>
             <div class="entry"><i class="fa-solid fa-car-on"></i> Vehicle Entry</div>
             <div class="in"><i class="fa-solid fa-circle-arrow-right"></i> In Vehicles</div>
             <div class="out"><i class="fa-solid fa-circle-arrow-left"></i> Out Vehicles</div>
             <div class="report"><i class="fa-solid fa-file-lines"></i> Reports</div>
-            <div class="income"><i class="fa-solid fa-sack-dollar"></i> Total Income</div>
+            <div class="income" style="border-bottom: 1px solid whitesmoke;"><i class="fa-solid fa-sack-dollar"></i> Total Income</div>
     </div>
 </div>
 
@@ -23,6 +24,7 @@
     const dashboard = document.querySelector('.dash')
     const category = document.querySelector('.cat')
     const entry = document.querySelector('.entry')
+    const inv = document.querySelector('.in')
     const outvehicles = document.querySelector('.out')
     const report = document.querySelector('.report')
     const income = document.querySelector('.income')
@@ -36,6 +38,10 @@
 
     entry.addEventListener('click', ()=> {
         window.open('/vehicle-entry', '_self')
+    })
+
+    inv.addEventListener('click', ()=> {
+        window.open('/in-vehicles', '_self')
     })
 
     outvehicles.addEventListener('click', ()=> {

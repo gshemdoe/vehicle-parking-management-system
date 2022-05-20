@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const entrySchema = new Schema({
+const outSchema = new Schema({
     regno: {
         type: String,
         required: true
@@ -26,11 +26,20 @@ const entrySchema = new Schema({
         type: String,
         required: true
     },
-    price: {
+    inCreated: {
+        type: Date,
+        required: true
+    },
+    remark: {
+        type: String,
+        required: false,
+        default: 'null'
+    },
+    pesa: {
         type: Number,
         required: true
     }
 }, { timestamps: true, strict: false })
 
-const model = mongoose.model('entryModel', entrySchema)
+const model = mongoose.model('outModel', outSchema)
 module.exports = model

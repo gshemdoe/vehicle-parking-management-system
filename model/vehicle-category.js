@@ -6,9 +6,9 @@ const categorySchema = new Schema({
         type: String,
         required:true
     },
-    desc: {
-        type: String,
-        required: false
+    price: {
+        type: Number,
+        required: true
     }
 }, { timestamps: true })
 

@@ -8,7 +8,12 @@
         </span>
     </div>
     <div class="profile">
-        <i class="fa-solid fa-address-card"></i>
-        <%- include('./profile-modal.ejs'); %>
+        <div class="pmodal">
+            <ul>
+                <li class="myacc"><i class="fa-solid fa-user"></i> &nbsp; My Account</li>
+                <li class="settings"><i class="fa-solid fa-screwdriver-wrench"></i> &nbsp; Settings</li>
+                <li class="logout" onclick="window.open('/logout', '_self')"><i class="fa-solid fa-power-off"></i></li>
+            </ul>
+        </div>
     </div>
 </header>

@@ -1,0 +1,87 @@
+<script>
+    //convert html collections to array
+    const vRow = Array.from(document.getElementsByClassName('inVrow'))
+
+    function searchVehicle() {
+        let input = document.getElementById('sInput').value
+        vRow.forEach(v => {
+            if (v.innerText.toLowerCase().includes(input.toLowerCase())) {
+                v.style.display = 'table-row'
+            } else {
+                v.style.display = 'none'
+            }
+        })
+    }
+
+    async function outVehicle(id, regno, vname, cname, pnum, oname, inCreated, createdAt, contact, pesa, remark) {
+        // let confirmation = confirm(`Click "OK" to delete ${e}`)
+
+        // if (confirmation == true) {
+        //     let res = await fetch(`/vehicle-out/${e}`)
+        //     console.log(res)
+        //     if (res.status == 200) {
+        //         location.reload()
+        //     }
+        // }
+
+        let exampleModal = document.getElementById('exampleModal')
+        let myModal = new bootstrap.Modal(exampleModal)
+        let regnoModal = document.getElementById('regno')
+        let onameModal = document.getElementById('oname')
+        let pnumModal = document.getElementById('pnum')
+        let vnameModal = document.getElementById('vname')
+        let cnameModal = document.getElementById('cname')
+        let createdAtModal = document.getElementById('createdAt')
+        let sforModal = document.getElementById('sfor')
+        let contactModal = document.getElementById('contact')
+        let chargesModal = document.getElementById('charges')
+
+        let d1 = new Date(inCreated)
+        let d2 = new Date(createdAt)
+        let dateDf = Math.abs(d1 - d2)
+
+        let thisDate = new Date(dateDf)
+        let day = thisDate.getUTCDate() - 1
+        let hours = thisDate.getUTCHours()
+        let minutes = thisDate.getUTCMinutes()
+
+        if (day != 0) {
+            hours = hours + (day * 24)
+        }
+
+        if (hours < 2) {
+            sforModal.value = hours + ' hour'
+        } else {
+            sforModal.value = hours + ' hours'
+        }
+
+        myModal.show()
+        pnumModal.value = pnum
+        onameModal.value = oname
+        vnameModal.value = vname
+        let inDate = new Date(inCreated)
+        createdAtModal.value =  inDate.toLocaleDateString()+' at '+inDate.toLocaleTimeString('en-us')
+        regnoModal.value = regno
+        cnameModal.value = cname
+        contactModal.value = contact
+        chargesModal.innerText = `Tsh. ${Number(pesa).toLocaleString('en-us')}/=`
+        document.getElementById('comment').value = remark
+        let leftDate = new Date(createdAt)
+        document.getElementById('lefton').value =  leftDate.toLocaleDateString()+' at '+leftDate.toLocaleTimeString('en-us')
+
+        document.getElementById('release').setAttribute('onclick', `outDelete('${id}')`)
+    }
+
+
+    async function printingOut() {
+        window.print()
+    }
+
+    async function outDelete(id) {
+        let con = confirm('Do you really want to delete this record?\n\nNote: It will be deleted permanently')
+
+        if(con == true) {
+            window.open(`/delete-out/${id}`, '_self')
+        } 
+    }
+</script>

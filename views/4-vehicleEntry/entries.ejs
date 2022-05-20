@@ -24,27 +24,28 @@
 
                     <div class="form">
                         <div class="header">
-                            <h3>🚔 Vehicle Entry</h3>
+                            <h3><i class="fa-solid fa-car-on"></i> Vehicle Entry</h3>
                         </div>
-                        <form method="POST" action="/vehicle-entry">
+                        <form method="POST" action="/vehicle-entry" id="submitForm">
                             <div class="form-group">
                                 <label>Registration Number</label>
-                                <input type="text" class="form-control" placeholder="T666 DAD" id="regno" name="regno"
+                                <input type="text" class="form-control" placeholder="Ex. T666 DAD" id="regno" name="regno"
                                     required>
                             </div>
 
                             <div class="form-group">
                                 <label>Vehicle's Company Name</label>
-                                <input type="text" class="form-control" placeholder="Toyota" id="vname" name="vname"
+                                <input type="text" class="form-control" placeholder="Ex. Toyota" id="vname" name="vname"
                                     required>
                             </div>
 
                             <div class="form-group">
                                 <label>Vehicle Category</label>
-                                <select class="form-select" name="cname" id="cname">
-                                    <option value="0">Select Category</option>
+                                <select class="form-select" name="cname" id="cname" required>
+                                    <option value="" selected disabled hidden
+                                    >Select Category</option>
                                     <% categories.forEach(cat=> { %>
-                                        <option value="<%= cat.cname %>">
+                                        <option value="<%= cat.cname %> - <%= cat.price %>">
                                             <%= cat.cname %>
                                         </option>
                                         <% }) %>
@@ -65,12 +66,16 @@
 
                             <div class="fbtns">
                                 <button type="submit" class="btn sbtn" name="submit-vehicle">Submit</button>
+
                                 <button type="reset" class="btn rbtn">Reset</button>
                             </div>
                         </form>
                     </div>
                 </div>
         </div>
+
+        <!-- modal -->
+        <%- include('./partials/modal.ejs'); %> 
 
 
 

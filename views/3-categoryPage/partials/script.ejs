@@ -13,13 +13,16 @@
         })
     }
 
-    function editCat(e) {
+    function editCat(e, cname, price) {
         let editFormAction = document.getElementById('edit-category-form')
         editFormAction.action = `edit-category/${e}`
+
+        document.getElementById('inputPrice').value = price
+        document.getElementById('inputCname').value = cname
     }
 
     function deleteCat(e) {
-        let confirmation = confirm('Click "OK" to delete this category or "Cancel" to abort')
+        let confirmation = confirm('Click "OK" to delete')
 
         if(confirmation == true) {
             window.open(`/deletecat/${e}`, '_self')

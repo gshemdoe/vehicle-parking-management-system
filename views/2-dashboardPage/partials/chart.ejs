@@ -1,0 +1,94 @@
+<script>
+    const pieOptions = {
+        plugins: {
+            legend: {
+            display: true,
+            labels: {
+                font: {
+                    size: 14
+                }
+            }
+        }
+        },
+    }
+
+    function chart1() {
+        const data = {
+            labels: [
+                'In Vehicles',
+                'Out Vehicles',
+                'Out Vehicles'
+            ],
+            datasets: [{
+                label: 'IN | OUT Highlights',
+                data: [
+                    Number('<%= entries.length %>'),
+                    5,
+                    3
+                ],
+                backgroundColor: [
+                    'green',
+                    'brown',
+                ],
+                hoverOffset: 4,
+                borderJoinStyle: 'round',
+                hoverBorderWidth: '3',
+                hoverBorderColor: 'gray'
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: pieOptions
+        };
+
+        const myChart = new Chart(document.getElementById('myChart'), config);
+    }
+    chart1()
+
+    function chart2() {
+        const data = {
+            labels: [
+                'One Wheeler',
+                'Two Wheeler',
+                'Three Wheeler',
+                'Four Wheeler'
+            ],
+            datasets: [{
+                label: 'IN | OUT Highlights',
+                data: [
+                    12,
+                    5,
+                    6,
+                    8,
+                    0,
+                    0,
+                    0
+                ],
+                backgroundColor: [
+                    'green',
+                    'brown',
+                    'red',
+                    'yellow',
+                    'gray',
+                    'purple'
+                ],
+                hoverOffset: 4,
+                borderJoinStyle: 'round',
+                hoverBorderWidth: '3',
+                hoverBorderColor: 'gray'
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: pieOptions
+        };
+
+        const myChart = new Chart(document.getElementById('myChart2'), config);
+    }
+    chart2()
+
+</script>

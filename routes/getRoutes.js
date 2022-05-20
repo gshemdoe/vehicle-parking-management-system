@@ -4,6 +4,9 @@ const adminModel = require('../model/admin')
 const loginCheck = require('../fns/loginCheck')
 const { append } = require('express/lib/response')
 const categoryModel = require('../model/vehicle-category')
+const entryModel = require('../model/ventry')
+const outModel = require('../model/vout')
+const totalModel = require('../model/totalv')
 
 //Create Admin
 router.get('/create', (req, res) => {
@@ -38,16 +41,47 @@ router.get('/recovery', async (req, res, next) => {
 })
 
 router.get('/dashboard', loginCheck, async (req, res) => {
-    res.render('2-dashboardPage/dashboard')
+    let total = await totalModel.findById('62700395de0f2c6379f2eff9')
+    let entries = await entryModel.find()
+    let data = {
+        one: 0,
+        two: 0,
+        three: 0,
+        four: 0,
+        five: 0,
+        six: 0,
+    }
+
+    entries.forEach(cat => {
+        if (cat.cname.toLowerCase().includes('one') || cat.cname.includes(1)) {
+            data.one += 1
+        }
+        else if (cat.cname.toLowerCase().includes('two') || cat.cname.includes(2)) {
+            data.two += 1
+        }
+        else if (cat.cname.toLowerCase().includes('three') || cat.cname.includes(3)) {
+            data.three += 1
+        }
+        else if (cat.cname.toLowerCase().includes('four') || cat.cname.includes(4)) {
+            data.four += 1
+        }
+        else if (cat.cname.toLowerCase().includes('five') || cat.cname.includes(5)) {
+            data.one += 1
+        }
+        else if (cat.cname.toLowerCase().includes('six') || cat.cname.includes(6)) {
+            data.one += 1
+        }
+    })
+    res.render('2-dashboardPage/dashboard', { total, entries, data })
 })
 
-router.get('/vehicle-category', loginCheck, async (req, res)=> {
+router.get('/vehicle-category', loginCheck, async (req, res) => {
     let categories = await categoryModel.find()
-    res.render('3-categoryPage/category', {categories})
+    res.render('3-categoryPage/category', { categories })
 })
 
 
-router.get('/deletecat/:id', async (req, res)=> {
+router.get('/deletecat/:id', async (req, res) => {
     const id = req.params.id
 
     try {
@@ -60,9 +94,29 @@ router.get('/deletecat/:id', async (req, res)=> {
     }
 })
 
-router.get('/vehicle-entry', loginCheck, async(req, res)=> {
+router.get('/vehicle-entry', loginCheck, async (req, res) => {
     let categories = await categoryModel.find()
-    res.render('4-vehicleEntry/entries', {categories})
+    res.render('4-vehicleEntry/entries', { categories })
 })
 
+router.get('/in-vehicles', loginCheck, async (req, res) => {
+    let invehicles = await entryModel.find()
+    res.render('5-in-vehiclesPage/invehicles', { invehicles })
+})
+
+router.get('/out-vehicle', async (req, res)=> {
+    let outvehicles = await outModel.find()
+    res.render('6-outVehicles/outvehicles', { outvehicles })
+})
+
+router.get('/delete-out/:id', async (req, res)=> {
+    let id = req.params.id
+    await outModel.findByIdAndDelete(id)
+    res.redirect('/out-vehicle')
+})
+
+router.get('/logout', async (req, res)=> {
+    await adminModel.findOneAndUpdate({username: 'admin'}, {isLogin: false})
+    res.redirect('/')
+})
 module.exports = router

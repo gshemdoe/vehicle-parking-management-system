@@ -1,3 +1,45 @@
 <script>
-    
+    const submitForm = document.getElementById('submitForm')
+
+    submitForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        let contact = document.getElementById('contact').value
+        let oname = document.getElementById('oname').value
+        let cname = document.getElementById('cname').value
+        let vname = document.getElementById('vname').value
+        let regno = document.getElementById('regno').value
+        let modalSpinner = document.querySelector('.modalSpinner')
+        let modalBody = document.querySelector('.modal-body')
+        let exampleModal = document.getElementById('exampleModal')
+        let myModal = new bootstrap.Modal(exampleModal)
+        let exampleModalLabel = document.getElementById('exampleModalLabel')
+
+        let data = { contact, oname, cname, vname, regno }
+        try {
+            let res = await fetch('/vehicle-entry', {
+                method: 'POST',
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            //if response is not object dont code res.json()
+            if (res.status == 200) {
+                myModal.show()
+                setTimeout(() => {
+                    modalSpinner.style.display = 'none'
+                    modalBody.style.display = 'block'
+                    exampleModalLabel.innerText = "✔ SUBMITTED"
+                }, 700)
+
+                submitForm.reset()
+            } else {
+                alert('Data not saved')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+
+    })
 </script>

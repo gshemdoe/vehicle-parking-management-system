@@ -1,21 +1,26 @@
 <style>
     .sidebar .routes .dash {
-         background-color: brown;
-         color: white;
+         background-color: whitesmoke;
+         color: #2a3542;
+    }
+
+    .main {
+        padding-top: 120px !important;
+        position: relative;
     }
 
     .main .right .greeting {
         text-align: center;
         padding: 16px;
         font-size: 48px;
-        color: white;
+        color: #2a3542;
     }
 
     .main .right .stats {
         width: 97%;
         margin: 12px auto;
         border-radius: 4px;
-        color: black;
+        color: #2a3542;
         display: flex;
         justify-content: space-between;
     }
@@ -26,14 +31,25 @@
         align-items: center;
         justify-content: center;
         background-color: white;
-        border-radius: 4px;
+        box-shadow: 1px 1px 4px #2a3542, -1px -1px 4px lightgray;
         width: 24%;
         height: 200px;
         padding: 16px 8px;
     }
 
+    .main .right .stats .div1st h1 {
+        font-family: 'Acme', fantasy;
+    }
+
+    .main .right .stats .cin i {
+        color: green !important;
+    }
+    .main .right .stats .cout i {
+        color: brown !important;
+    }
+
     .main .right .stats .div1st:hover i {
-        color: gold;
+        font-size: 60px !important;
     }
 
     .main .right .stats .done24 {
@@ -42,7 +58,7 @@
 
     .main .right .stats .div1st i {
         font-size: 44px;
-        color: brown;
+        color: #2a3542;
     }
 
     .main .right .stats div .title {
@@ -55,83 +71,30 @@
 
     .main .right .highlights {
         width: 97%;
-        margin: 12px auto;
-        background-color: white;
+        margin: 0 auto 0 auto;
         border-radius: 4px;
-        color: black;
+        color: #2a3542;
         text-align: center;
-        padding: 12px;
-    }
-
-    .main .right .highlights .title {
-        font-size: x-large;
-        display: inline-block;
-        text-align: center;
-    }
-
-    .main .right .highlights .indicator {
-        margin-top: 8px;
-    }
-
-    .main .right .highlights .indicator .indin {
-        background-color: green;
-        height: 16px;
-        width: 72px;
-        display: inline-block;
-    }
-
-    .main .right .highlights .indicator .indout {
-        background-color: red;
-        height: 16px;
-        width: 72px;
-        display: inline-block;
-        margin-left: 48px;
     }
 
     .main .right .highlights .pierec {
-        width: 90%;
+        width: 100%;
         margin: 12px auto;
         display: flex;
         justify-content: space-between;
-        border: 4px gray solid;
         border-radius: 8px;
+        background-color: white;
     }
 
-    .main .right .highlights .pierec section {
-        height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    .main .right .highlights .pierec section:hover {
-        
-    }
-
-    .main .right .highlights .pierec section span {
-        background-color: black;
-        color: white;
-        display: none;
-        padding: 8px;
+    .pierec .graph {
+        width: 49.2%;
         border-radius: 4px;
-        border: white 1px;
+        box-shadow: 1px 1px 4px #2a3542, -1px -1px 4px lightgray;
     }
 
-    .main .right .highlights .pierec .green {
-        width: 75%;  /* dynamic */
-        background-color: green;
-    }
-    .main .right .highlights .pierec .red {
-        width: 24.9%;  /* dynamic */
-        background-color: red;
-    }
-
-    .main .right .highlights .pierec .green:hover span {
-        display: inline-block;
-    }
-
-    .main .right .highlights .pierec .red:hover span {
-        display: inline-block;
+    .pierec .graph canvas {
+        height: 360px !important;
+        width: 360px !important;
+        margin: 12px auto;
     }
 </style>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/fontawesome-free-6.1.1-web/css/all.min.css">
-    <title>Dashboard</title>
+    <title>In Vehicles</title>
     <%- include('./partials/style.ejs'); %>
         <%- include('../a-global/style.ejs'); %>
 </head>
@@ -19,13 +19,12 @@
 
                 <div class="right" style="color: white;">
                     <div class="nav">
-                        <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>vehicle category management</span>
+                        <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>In vehicles</span>
                     </div>
-                    <div class="categories">
+                    <div class="incoming">
                         <section class="title">
                             <h3>
-                                Vehicle Categories
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new vehicle category</button>
+                                Incoming Vehicles
                             </h3>
                         </section>
                         <section class="search">
@@ -41,7 +40,7 @@
                            </div>
                            <div class="searchInpt">
                                <span>Search: &nbsp;</span>
-                               <input type="text" id="sInput" placeholder="search category" oninput="searchCat()">
+                               <input type="text" id="sInput" placeholder="search category" oninput="searchVehicle()">
                            </div>
                         </section>
                         <section class="tableCont">
@@ -49,23 +48,31 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Vehicle Category</th>
-                                <th scope="col">Price (per hour)</th>
-                                <th scope="col">Published On</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Vehicle Number</th>
+                                <th scope="col">Company</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Parking Number</th>
+                                <th scope="col">Vehicle's Owner</th>
+                                <th scope="col">Entered On</th>
+                                <th scope="col">Stayed</th>
+                                <th scope="col">Action</th>
                               </tr>
                             </thead>
                             <tbody>
-                                <% categories.forEach((category, index) => { %>
-                                    <tr class="categoryRow">
+                                <% invehicles.forEach((v, index) => { %>
+                                    <tr class="inVrow">
                                         <th scope="row"><%= index + 1 %> </th>
-                                        <td><%= category.cname %> </td>
-                                        <td>Tsh. <%= category.price.toLocaleString('en-US') %>/= </td>
-                                        <td><%= category.createdAt.toLocaleString() %> </td>
+                                        <td><%= v.regno %> </td>
+                                        <td><%= v.vname %> </td>
+                                        <td><%= v.cname %> </td>
+                                        <td><%= v.pnum %> </td>
+                                        <td><%= v.oname %> </td>
+                                        <td><%= v.createdAt.toLocaleString() %> </td>
+                                        <td class="liveDate" data-created="<%= v.createdAt %> ">00:00:00</td>
                                         <td>
-                                            <i class="edit fa-regular fa-pen-to-square" type="button" data-bs-toggle="modal" data-bs-target="#editModal" onclick="editCat('<%= category.id %>', '<%= category.cname %>', '<%= category.price %>')"></i>
-
-                                            <i class="delete fa-regular fa-trash-can" onclick="deleteCat('<%= category.id %>')"></i>
+                                            <button type="button" onclick="outVehicle('<%= v.id %>', '<%= v.regno %>', '<%= v.vname %>', '<%= v.cname %>', '<%= v.pnum %>', '<%= v.oname %>', '<%= v.createdAt %>', '<%= v.contact %>', '<%= v.price %>')">
+                                             <i class="fa-solid fa-circle-info"></i> Details
+                                            </button>
                                         </td>
                                       </tr>
                                 <% }) %>
@@ -75,7 +82,7 @@
                         
                         <section class="nextprev">
                             <div class="showing">
-                                Showing 1 to <%= categories.length %>  of <%= categories.length %>  entries
+                                Showing 1 to <%= invehicles.length %>  of <%= invehicles.length %>  entries
                             </div>
                             <div class="pn">
                                 <button disabled>Prev</button>
@@ -86,8 +93,11 @@
                     </div>
                 </div>
         </div>
-        <%- include('./partials/add-cat-modal'); %>
-        <%- include('./partials/edit-cat-modal'); %>
+
+        <!-- modal -->
+        <%- include('./partials/modal'); %> 
+
+        
   
   
 

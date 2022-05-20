@@ -1,0 +1,88 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Vehicle's Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section class="adding">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Owner's name</span>
+                        <input type="text" class="form-control" placeholder="oname" id="oname" aria-label="Username"
+                            aria-describedby="basic-addon1" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Owner's contacts</span>
+                        <input type="text" class="form-control" placeholder="contact" aria-label="Username"
+                            aria-describedby="basic-addon1" id="contact" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Vehicle name</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" id="vname" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Reg. number</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" id="regno" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Category name</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" id="cname" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Parking number</span>
+                        <input type="text" class="form-control" placeholder="Parking Number" aria-label="Parking Number"
+                            aria-describedby="basic-addon1" id="pnum" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Entered on</span>
+                        <input type="text" class="form-control" placeholder="..." aria-label="Entered On"
+                            aria-describedby="basic-addon1" id="createdAt" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Left on</span>
+                        <input type="text" class="form-control" placeholder="..." aria-label="Left On"
+                            aria-describedby="basic-addon1" id="lefton" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Stayed for</span>
+                        <input type="text" class="form-control" placeholder="..." aria-label="Stayed For:"
+                            aria-describedby="basic-addon1" id="sfor" disabled>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Remark</span>
+                        <input type="text" class="form-control" placeholder="..." aria-label="Comments"
+                            aria-describedby="basic-addon1" id="comment" disabled>
+                    </div>
+
+                    <hr>
+
+                    <div class="parent-fees">
+                        <div class="total-charges">
+                            <h2 class="title"><i class="fa-solid fa-file-invoice"></i> Total Charges</h2>
+                            <h2 class="pesa"><i class="fa-regular fa-circle-right"></i> <b id="charges"></b> </h2>
+                        </div>
+                    </div>
+                    <hr>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn print sbtn" onclick="printingOut()"><i class="fa-solid fa-print"></i> Receipt</button>
+                <button class="btn sbtn" id="release"><i class="fa-regular fa-trash-can"></i> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

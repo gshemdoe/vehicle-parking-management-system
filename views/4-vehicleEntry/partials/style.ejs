@@ -1,21 +1,43 @@
 <style>
     .sidebar .routes .entry {
-         background-color: brown;
-         color: white;
+        background-color: whitesmoke;
+        color: #2a3542;
     }
 
     .form {
         width: 97%;
-        margin: 12px auto 0 auto;
+        margin: 16px auto 12px auto;
         background-color: white;
-        color: black;
+        border-radius: 8px;
+        box-shadow: 1px 1px 4px lightgray, -1px -1px 4px lightgray;
+        color: #2a3542;
         padding: 12px;
     }
 
     .form label {
         font-family: 'Acme', fantasy;
-        font-size: large;
+        font-size: medium;
         margin-top: 24px;
+    }
+
+    .form select option {
+        color: #2a3542 !important;
+        font-size: large !important;
+        font-style: normal !important;
+    }
+
+    .form select:invalid,
+    select option[value=""] {
+        color: gray;
+        font-size: small;
+        font-style: italic;
+        font-family: fantasy;
+    }
+
+    .form input::placeholder {
+        font-size: small;
+        font-style: italic;
+        font-family: fantasy;
     }
 
     .form .fbtns {
@@ -24,17 +46,122 @@
 
     .form .fbtns .sbtn {
         background-color: brown;
-        color: white;
+        color: whitesmoke;
     }
 
     .form .fbtns .rbtn {
         background-color: gray;
-        color: white;
+        color: whitesmoke;
     }
 
     .form .header {
-        border-bottom: 2px gray solid;
+        border-bottom: 2px lightgray solid;
         color: gray;
     }
 
+    .form .header i {
+        color: #2a3542;
+    }
+
+
+
+    .wrapper {
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee
+    }
+
+    .checkmark__circle {
+        stroke-dasharray: 166;
+        stroke-dashoffset: 166;
+        stroke-width: 2;
+        stroke-miterlimit: 10;
+        stroke: #7ac142;
+        fill: none;
+        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+    }
+
+    .checkmark {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: block;
+        stroke-width: 2;
+        stroke: #fff;
+        stroke-miterlimit: 10;
+        margin: 10% auto;
+        box-shadow: inset 0px 0px 0px #7ac142;
+        animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    }
+
+    .checkmark__check {
+        transform-origin: 50% 50%;
+        stroke-dasharray: 48;
+        stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+    }
+
+    @keyframes stroke {
+        100% {
+            stroke-dashoffset: 0
+        }
+    }
+
+    @keyframes scale {
+
+        0%,
+        100% {
+            transform: none
+        }
+
+        50% {
+            transform: scale3d(1.1, 1.1, 1)
+        }
+    }
+
+    @keyframes fill {
+        100% {
+            box-shadow: inset 0px 0px 0px 30px #7ac142
+        }
+    }
+
+    .modal {
+        font-family: 'Acme', fantasy !important;
+    }
+
+    .modal h5 {
+        font-size: large;
+        text-align: center;
+        display: block;
+        margin-top: 12px;
+    }
+
+    .modal .modal-body {
+        display: none;
+    }
+
+    .spinner-4 {
+        width: 50px;
+        height: 50px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+        margin-left: 45%;
+        border-radius: 50%;
+        padding: 1px;
+        background: conic-gradient(#0000 10%, #f03355) content-box;
+        -webkit-mask:
+            repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+            radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 calc(100% - 8px));
+        -webkit-mask-composite: destination-in;
+        mask-composite: intersect;
+        animation: s4 1s infinite steps(10);
+    }
+
+    @keyframes s4 {
+        to {
+            transform: rotate(1turn)
+        }
+    }
 </style>
