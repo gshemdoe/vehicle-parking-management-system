@@ -8,6 +8,9 @@ const entryModel = require('../model/ventry')
 const outModel = require('../model/vout')
 const totalModel = require('../model/totalv')
 
+const endOfDay = require('date-fns/endOfDay')
+const startOfDay = require('date-fns/startOfDay')
+
 //Create Admin
 router.get('/create', (req, res) => {
     adminModel.create({
@@ -113,6 +116,27 @@ router.get('/delete-out/:id', async (req, res)=> {
     let id = req.params.id
     await outModel.findByIdAndDelete(id)
     res.redirect('/out-vehicle')
+})
+
+router.get('/report', async (req, res)=> {
+    res.render('6-Report/report')
+})
+
+router.get('/report/:from/:to', async (req, res)=> {
+    const from = req.params.from
+    const to = req.params.to
+
+    let data = await outModel.find({
+        createdAt: {
+            $gte: startOfDay(new Date(from)),
+            $lte: endOfDay(new Date(to))
+        }
+    })
+    res.send(data)
+})
+
+router.get('/total-income', async (req, res)=> {
+    res.render('7-income/income')
 })
 
 router.get('/logout', async (req, res)=> {

@@ -1,0 +1,138 @@
+<style>
+    .sidebar .routes .income {
+        background-color: whitesmoke;
+        color: #2a3542;
+    }
+
+    .main .right .incoming {
+        width: 97%;
+        margin: 12px auto;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 1px 1px 4px lightgray, -1px -1px 4px lightgray;
+        color: #2a3542;
+    }
+
+    .incoming .dateWrapper {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 3px lightgray solid;
+        border-radius: 24px;
+        padding-bottom: 24px;
+        margin-bottom: 16px;
+    }
+
+    .main .right .incoming .dateInput {
+        display: flex;
+        justify-content: space-between;
+        margin: 16px auto;
+        padding: 32px;
+        width: 100%;
+    }
+
+    .incoming .to,
+    .incoming .from {
+        width: 45%;
+        color: #2a3542;
+    }
+
+    .incoming .dateInput h3 {
+        padding-left: 16px;
+    }
+
+    .incoming .dateInput input {
+        font-size: large;
+        width: 100%;
+        text-align: center;
+        height: 48px;
+        border-radius: 64px;
+    }
+
+    .incoming .dateWrapper .genBtn {
+        text-align: center;
+    }
+
+    .incoming .dateWrapper .genBtn button {
+        background-color: brown;
+        color: white;
+        border-radius: 4px;
+        border: none;
+        padding: 12px 4px;
+        font-weight: bold;
+        font-size: 22px;
+        font-family: 'Acme', fantasy;
+        width: 50%;
+    }
+
+    .incoming .dateWrapper .genBtn button:hover {
+        background-color: #2a3542;
+    }
+
+    .main .right .incoming .search {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        margin: 4px auto;
+        width: 95%;
+    }
+
+    .main .right .incoming .search .idadi select {
+        height: 32px;
+    }
+
+    .main .right .incoming .search .idadi select:focus {
+        border: brown 2px solid;
+    }
+
+    .main .right .incoming .search .searchInpt input {
+        height: 32px;
+        font-size: medium;
+        outline: none;
+        border-radius: 4px;
+        padding: 6px;
+    }
+
+    .main .right .incoming .search .searchInpt input::placeholder {
+        font-size: small;
+    }
+
+    .main .right .incoming .search .searchInpt input:focus {
+        border: brown 2px solid;
+    }
+
+    .main .right .incoming .tableCont {
+        width: 95%;
+        margin: 12px auto;
+        padding: 0;
+        border-top: 1px gray solid;
+        border-bottom: 1px gray solid;
+    }
+
+    .main .right .incoming .tableCont table {
+        width: 100%;
+        color: #2a3542 !important;
+    }
+
+    .main .right .incoming .tableCont table td button {
+        outline: none;
+        border: none;
+        background-color: brown;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 2px;
+        font-size: small;
+    }
+
+    .main .right .incoming .nextprev {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 30px;
+    }
+
+    .nothing {
+        color: brown;
+        font-size: 18px;
+        text-align: center;
+        display: none;
+    }
+</style>

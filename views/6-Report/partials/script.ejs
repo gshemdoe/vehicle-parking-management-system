@@ -1,0 +1,54 @@
+<script>
+    //convert html collections to array
+    const vRow = Array.from(document.getElementsByClassName('inVrow'))
+
+    function searchVehicle() {
+        let input = document.getElementById('sInput').value
+        vRow.forEach(v => {
+            if (v.innerText.toLowerCase().includes(input.toLowerCase())) {
+                v.style.display = 'table-row'
+            } else {
+                v.style.display = 'none'
+            }
+        })
+    }
+
+    async function generate() {
+        var from = document.getElementById('fromDate').value
+        var to = document.getElementById('toDate').value
+        var tbody = document.getElementById('tbody')
+        var spinner = document.getElementById('spinner')
+        var nothing = document.getElementById('nothing')
+
+        if (from && to) {
+            tbody.innerHTML = ''
+            nothing.style.setProperty('display', 'none')
+            spinner.style.display = 'flex'
+            let res = await fetch(`/report/${from}/${to}`)
+            let data = await res.json()
+
+            if (data.length != 0) {
+                data.forEach((v, index) => {
+                    let tr = document.createElement('tr')
+                    tr.classList.add('inRow')
+
+                    setTimeout(() => {
+                        tr.innerHTML = `<th scope="row">${index + 1}</th> <td>${v.regno}</td> <td>${v.cname}</td> <td>${v.oname}</td> <td>Tsh. ${Number(v.pesa).toLocaleString('en-us')}/=</td>`
+                        tbody.appendChild(tr)
+                        spinner.style.setProperty('display', 'none', 'important')
+                    }, 1000)
+                })
+            }
+            else {
+                setTimeout(() => {
+                    nothing.style.setProperty('display', 'block')
+                    spinner.style.setProperty('display', 'none', 'important')
+                }, 1000)
+            }
+
+        }
+        else {
+            alert('Please Enter Date on Both Sides')
+        }
+    }
+</script>
