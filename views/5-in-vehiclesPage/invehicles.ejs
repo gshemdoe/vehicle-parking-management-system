@@ -23,66 +23,82 @@
                     </div>
                     <div class="incoming">
                         <section class="title">
-                            <h3>
-                                Incoming Vehicles
-                            </h3>
+                            Incoming & In Vehicles
+                        </section>
+                        <section class="acc">
+                            <%- include('./partials/acc'); %>
                         </section>
                         <section class="search">
-                           <div class="idadi">
-                               <span>Show</span>
-                               <select name="idadi" id="select-idadi">
-                                   <option value="ten">10</option>
-                                   <option value="fifteen">15</option>
-                                   <option value="t25">25</option>
-                                   <option value="fifty">50 ></option>
-                               </select>
-                               <span>entries</span>
-                           </div>
-                           <div class="searchInpt">
-                               <span>Search: &nbsp;</span>
-                               <input type="text" id="sInput" placeholder="search category" oninput="searchVehicle()">
-                           </div>
+                            <div class="idadi">
+                                <span>Show</span>
+                                <select name="idadi" id="select-idadi">
+                                    <option value="ten">10</option>
+                                    <option value="fifteen">15</option>
+                                    <option value="t25">25</option>
+                                    <option value="fifty">50 ></option>
+                                </select>
+                                <span>entries</span>
+                            </div>
+                            <div class="searchInpt">
+                                <span>Search: &nbsp;</span>
+                                <input type="text" id="sInput" placeholder="search category" oninput="searchVehicle()">
+                            </div>
                         </section>
                         <section class="tableCont">
                             <table class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Vehicle Number</th>
-                                <th scope="col">Company</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Parking Number</th>
-                                <th scope="col">Vehicle's Owner</th>
-                                <th scope="col">Entered On</th>
-                                <th scope="col">Stayed</th>
-                                <th scope="col">Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <% invehicles.forEach((v, index) => { %>
-                                    <tr class="inVrow">
-                                        <th scope="row"><%= index + 1 %> </th>
-                                        <td><%= v.regno %> </td>
-                                        <td><%= v.vname %> </td>
-                                        <td><%= v.cname %> </td>
-                                        <td><%= v.pnum %> </td>
-                                        <td><%= v.oname %> </td>
-                                        <td><%= v.createdAt.toLocaleString() %> </td>
-                                        <td class="liveDate" data-created="<%= v.createdAt %> ">00:00:00</td>
-                                        <td>
-                                            <button type="button" onclick="outVehicle('<%= v.id %>', '<%= v.regno %>', '<%= v.vname %>', '<%= v.cname %>', '<%= v.pnum %>', '<%= v.oname %>', '<%= v.createdAt %>', '<%= v.contact %>', '<%= v.price %>')">
-                                             <i class="fa-solid fa-circle-info"></i> Details
-                                            </button>
-                                        </td>
-                                      </tr>
-                                <% }) %>
-                            </tbody>
-                        </table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Vehicle Number</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Category</th>
+                                        <th scope="col">Parking Number</th>
+                                        <th scope="col">Vehicle's Owner</th>
+                                        <th scope="col">Entered On</th>
+                                        <th scope="col">Stayed</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% invehicles.forEach((v, index)=> { %>
+                                        <tr class="inVrow">
+                                            <th scope="row">
+                                                <%= index + 1 %>
+                                            </th>
+                                            <td>
+                                                <%= v.regno %>
+                                            </td>
+                                            <td>
+                                                <%= v.vname %>
+                                            </td>
+                                            <td>
+                                                <%= v.cname %>
+                                            </td>
+                                            <td>
+                                                <%= v.pnum %>
+                                            </td>
+                                            <td>
+                                                <%= v.oname %>
+                                            </td>
+                                            <td>
+                                                <%= v.createdAt.toLocaleString() %>
+                                            </td>
+                                            <td class="liveDate" data-created="<%= v.createdAt %> ">00:00:00</td>
+                                            <td>
+                                                <button type="button"
+                                                    onclick="outVehicle('<%= v.id %>', '<%= v.regno %>', '<%= v.vname %>', '<%= v.cname %>', '<%= v.pnum %>', '<%= v.oname %>', '<%= v.createdAt %>', '<%= v.contact %>', '<%= v.price %>')">
+                                                    <i class="fa-solid fa-circle-info"></i> Details
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
                         </section>
-                        
+
                         <section class="nextprev">
                             <div class="showing">
-                                Showing 1 to <%= invehicles.length %>  of <%= invehicles.length %>  entries
+                                Showing 1 to <%= invehicles.length %> of <%= invehicles.length %> entries
                             </div>
                             <div class="pn">
                                 <button disabled>Prev</button>
@@ -91,19 +107,22 @@
                             </div>
                         </section>
                     </div>
+
+                    <br><br>
+                    <%- include('../a-global/footer.ejs'); %>
                 </div>
         </div>
 
         <!-- modal -->
-        <%- include('./partials/modal'); %> 
+        <%- include('./partials/modal'); %>
 
-        
-  
-  
 
-        <%- include('./partials/script'); %>
-        <%- include('../a-global/script'); %>
-        <script type="text/javascript" src="/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+
+
+
+            <%- include('./partials/script'); %>
+                <%- include('../a-global/script'); %>
+                    <script type="text/javascript" src="/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

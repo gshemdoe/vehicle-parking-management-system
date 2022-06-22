@@ -8,8 +8,7 @@ const entryModel = require('../model/ventry')
 const outModel = require('../model/vout')
 const totalModel = require('../model/totalv')
 
-const endOfDay = require('date-fns/endOfDay')
-const startOfDay = require('date-fns/startOfDay')
+const { startOfYesterday, endOfYesterday, startOfDay, endOfDay, startOfWeek, endOfWeek, endOfISOWeek, startOfISOWeek, startOfMonth, endOfMonth } = require('date-fns')
 
 //Create Admin
 router.get('/create', (req, res) => {
@@ -45,37 +44,42 @@ router.get('/recovery', async (req, res, next) => {
 
 router.get('/dashboard', loginCheck, async (req, res) => {
     let total = await totalModel.findById('62700395de0f2c6379f2eff9')
-    let entries = await entryModel.find()
-    let data = {
-        one: 0,
-        two: 0,
-        three: 0,
-        four: 0,
-        five: 0,
-        six: 0,
-    }
+    let ldate = new Date()
+    ldate.setDate(ldate.getDate() - 7)
 
-    entries.forEach(cat => {
-        if (cat.cname.toLowerCase().includes('one') || cat.cname.includes(1)) {
-            data.one += 1
-        }
-        else if (cat.cname.toLowerCase().includes('two') || cat.cname.includes(2)) {
-            data.two += 1
-        }
-        else if (cat.cname.toLowerCase().includes('three') || cat.cname.includes(3)) {
-            data.three += 1
-        }
-        else if (cat.cname.toLowerCase().includes('four') || cat.cname.includes(4)) {
-            data.four += 1
-        }
-        else if (cat.cname.toLowerCase().includes('five') || cat.cname.includes(5)) {
-            data.one += 1
-        }
-        else if (cat.cname.toLowerCase().includes('six') || cat.cname.includes(6)) {
-            data.one += 1
+    let entries = await entryModel.find({status: 'in'})
+    let outs = await outModel.find()
+
+    let parkedThisMonth = await entryModel.find({
+        createdAt: {
+            $gte: startOfMonth(new Date()),
+            $lte: endOfMonth(new Date())
         }
     })
-    res.render('2-dashboardPage/dashboard', { total, entries, data })
+
+    let parkedToday = await entryModel.find({
+        createdAt: {
+            $gte: startOfDay(new Date()),
+            $lte: endOfDay(new Date())
+        }
+    })
+
+    let parkedThisWeek = await entryModel.find({
+        createdAt: {
+            $gte: startOfISOWeek(new Date()),
+            $lte: endOfISOWeek(new Date())
+        }
+    })
+
+
+    let parkedLastWeek = await entryModel.find({
+        createdAt: {
+            $gte: startOfISOWeek(new Date(ldate)),
+            $lte: endOfISOWeek(new Date(ldate))
+        }
+    })
+
+    res.render('2-dashboardPage/dashboard', { total, entries, outs, parkedThisWeek, parkedLastWeek, parkedThisMonth, parkedToday })
 })
 
 router.get('/vehicle-category', loginCheck, async (req, res) => {
@@ -103,11 +107,12 @@ router.get('/vehicle-entry', loginCheck, async (req, res) => {
 })
 
 router.get('/in-vehicles', loginCheck, async (req, res) => {
-    let invehicles = await entryModel.find()
-    res.render('5-in-vehiclesPage/invehicles', { invehicles })
+    let invehicles = await entryModel.find({ status: 'in'})
+    let categories = await categoryModel.find()
+    res.render('5-in-vehiclesPage/invehicles', { invehicles, categories })
 })
 
-router.get('/out-vehicle', async (req, res)=> {
+router.get('/out-vehicle', loginCheck, async (req, res)=> {
     let outvehicles = await outModel.find()
     res.render('6-outVehicles/outvehicles', { outvehicles })
 })
@@ -118,7 +123,7 @@ router.get('/delete-out/:id', async (req, res)=> {
     res.redirect('/out-vehicle')
 })
 
-router.get('/report', async (req, res)=> {
+router.get('/report', loginCheck, async (req, res)=> {
     res.render('6-Report/report')
 })
 
@@ -135,8 +140,48 @@ router.get('/report/:from/:to', async (req, res)=> {
     res.send(data)
 })
 
-router.get('/total-income', async (req, res)=> {
-    res.render('7-income/income')
+router.get('/total-income', loginCheck, async (req, res)=> {
+    let kiasiChote = 0
+    let kiasiChaLeo = 0
+    let kiasoChaJana = 0
+
+    let docs = await outModel.find()
+
+    let today = await outModel.find({
+        createdAt: {
+            $gte: startOfDay(new Date()),
+            $lte: endOfDay(new Date())
+        }
+    })
+
+    let yesterday = await outModel.find({
+        createdAt: {
+            $gte: startOfYesterday(new Date()),
+            $lte: endOfYesterday(new Date())
+        }
+    })
+
+    docs.forEach(doc => {
+        kiasiChote+=doc.pesa
+    })
+    today.forEach(doc => {
+        kiasiChaLeo+=doc.pesa
+    })
+    yesterday.forEach(doc => {
+        kiasoChaJana+=doc.pesa
+    })
+    res.render('7-income/income', { mapato: {
+        leo: kiasiChaLeo,
+        jana: kiasoChaJana,
+        zote: kiasiChote,
+        leoAss: (kiasiChaLeo/150000)*100,
+        janaAss: (kiasoChaJana/150000)*100,
+        zoteAss: (kiasiChote/5000000)*100
+    } })
+})
+
+router.get('/account', loginCheck, async (req, res)=> {
+    res.render('8-account/account')
 })
 
 router.get('/logout', async (req, res)=> {

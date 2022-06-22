@@ -10,10 +10,16 @@
     <div class="profile">
         <div class="pmodal">
             <ul>
-                <li class="myacc"><i class="fa-solid fa-user"></i> &nbsp; My Account</li>
+                <li class="myacc" id="accountLink"><i class="fa-solid fa-user"></i> &nbsp; Profile</li>
                 <li class="settings"><i class="fa-solid fa-screwdriver-wrench"></i> &nbsp; Settings</li>
-                <li class="logout" onclick="window.open('/logout', '_self')"><i class="fa-solid fa-power-off"></i></li>
+                <li class="logout" title="Logout" onclick="window.open('/logout', '_self')"><i class="fa-solid fa-power-off"></i></li>
             </ul>
         </div>
     </div>
 </header>
+
+<script>
+document.getElementById('accountLink').addEventListener('click', ()=> {
+    window.open('/account', '_self')
+})
+</script>

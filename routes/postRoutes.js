@@ -77,14 +77,14 @@ router.post('/vehicle-entry', async (req, res)=> {
         let number = Math.floor((10000 + Math.random() * 90000))
         let pnum = `P${number}`
         await entryModel.create({
-            regno, vname, cname, oname, contact, pnum, price
+            regno, vname, cname, oname, contact, pnum, price, status: 'in'
         })
         await totalModel.findByIdAndUpdate('62700395de0f2c6379f2eff9', {$inc: {total: 1}})
         console.log('Vehicle added to database successfully')
-        res.sendStatus(200)
+        res.redirect('/in-vehicles')
     } catch (error) {
-        console.log(err.message)
-        console.log(err)
+        console.log(error.message)
+        console.log(error)
     }
 })
 
@@ -108,8 +108,8 @@ router.post('/vehicle-out/:id', async (req, res) => {
         }
 
         await outModel.create(doc)
-        await entryModel.findByIdAndDelete(id)
-        console.log('doc deleted')
+        await entryModel.findByIdAndUpdate(id, {status: 'out'})
+        console.log('doc updated from in to out')
         res.sendStatus(200)
     } catch (error) {
         console.log(error.message)

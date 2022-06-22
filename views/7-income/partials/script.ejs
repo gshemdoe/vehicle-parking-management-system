@@ -1,0 +1,31 @@
+<script>
+    let adt = Array.from(document.getElementsByClassName('adt'))
+    let yesterday = document.getElementById('yday')
+
+    async function dateG() {
+    let trh = new Date()
+
+    adt.forEach(e => {
+        e.innerText = trh.toLocaleDateString() + '  -  ' + trh.toLocaleTimeString()
+    })
+
+    let yday = trh.setDate(trh.getDate() - 1)
+    yesterday.innerText = trh.toLocaleDateString()
+
+}
+
+setInterval(()=> {
+    dateG()
+}, 1000)
+
+var zote = document.getElementById('zote')
+var leo = document.getElementById('leo')
+var jana = document.getElementById('jana')
+var zoteAss = Number('<%= mapato.zoteAss %>')
+var leoAss = Number('<%= mapato.leoAss %>')
+var janaAss = Number('<%= mapato.janaAss %>')
+
+zote.setAttribute('style', `width: ${zoteAss}%; background-color: brown;`)
+leo.setAttribute('style', `width: ${leoAss}%; background-color: brown;`)
+jana.setAttribute('style', `width: ${janaAss}%; background-color: brown;`)
+</script>

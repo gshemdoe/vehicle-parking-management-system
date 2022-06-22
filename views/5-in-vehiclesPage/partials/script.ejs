@@ -63,6 +63,10 @@
         regnoModal.value = regno
         cnameModal.value = cname
         contactModal.value = contact
+        if (hours == 0) {
+            hours = 1
+            sforModal.value = `${minutes} minutes and ${thisDate.getUTCSeconds()} seconds`
+        }
         let totalCh = Number(price * hours)
         chargesModal.innerText = `Tsh. ${totalCh.toLocaleString('en-us')}/=`
         document.getElementById('fees').innerText = `Tsh. ${Number(price).toLocaleString('en-us')}/=`
@@ -123,7 +127,7 @@
             body: JSON.stringify(data)
         })
 
-        if(res.status == 200) {
+        if (res.status == 200) {
             location.reload()
         }
     }

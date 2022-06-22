@@ -22,7 +22,7 @@
                 label: 'IN | OUT Highlights',
                 data: [
                     Number('<%= entries.length %>'),
-                    5
+                    Number('<%= outs.length %>')
                 ],
                 backgroundColor: [
                     'green',
@@ -48,29 +48,18 @@
     function chart2() {
         const data = {
             labels: [
-                'One Wheeler',
-                'Two Wheeler',
-                'Three Wheeler',
-                'Four Wheeler'
+                'This Week',
+                'Last Week'
             ],
             datasets: [{
-                label: 'IN | OUT Highlights',
+                label: 'This Week - Last Week Ratio',
                 data: [
-                    12,
-                    5,
-                    6,
-                    8,
-                    0,
-                    0,
-                    0
+                    Number('<%= parkedThisWeek.length %>'),
+                    Number('<%= parkedLastWeek.length %>')
                 ],
                 backgroundColor: [
-                    'green',
-                    'brown',
-                    'red',
-                    'yellow',
-                    'gray',
-                    'purple'
+                    '#2a3542',
+                    'brown'
                 ],
                 hoverOffset: 4,
                 borderJoinStyle: 'round',
@@ -80,7 +69,7 @@
         };
 
         const config = {
-            type: 'pie',
+            type: 'doughnut',
             data: data,
             options: pieOptions
         };

@@ -12,7 +12,7 @@
     <div class="routes">
             <div class="dash"><i class="fa-solid fa-gauge"></i> Dashboard</div>
             <div class="cat"><i class="fa-solid fa-folder-tree"></i> Vehicle category</div>
-            <div class="entry"><i class="fa-solid fa-car-on"></i> Vehicle Entry</div>
+            <!-- <div class="entry"><i class="fa-solid fa-car-on"></i> Vehicle Entry</div> -->
             <div class="in"><i class="fa-solid fa-circle-arrow-right"></i> In Vehicles</div>
             <div class="out"><i class="fa-solid fa-circle-arrow-left"></i> Out Vehicles</div>
             <div class="report"><i class="fa-solid fa-file-lines"></i> Reports</div>
@@ -23,7 +23,7 @@
 <script>
     const dashboard = document.querySelector('.dash')
     const category = document.querySelector('.cat')
-    const entry = document.querySelector('.entry')
+    // const entry = document.querySelector('.entry')
     const inv = document.querySelector('.in')
     const outvehicles = document.querySelector('.out')
     const report = document.querySelector('.report')
@@ -36,9 +36,9 @@
         window.open('/vehicle-category', '_self')
     })
 
-    entry.addEventListener('click', ()=> {
-        window.open('/vehicle-entry', '_self')
-    })
+    // entry.addEventListener('click', ()=> {
+    //     window.open('/vehicle-entry', '_self')
+    // })
 
     inv.addEventListener('click', ()=> {
         window.open('/in-vehicles', '_self')

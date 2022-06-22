@@ -29,6 +29,10 @@ const entrySchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 }, { timestamps: true, strict: false })
 

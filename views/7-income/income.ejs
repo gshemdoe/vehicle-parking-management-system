@@ -19,11 +19,48 @@
 
                 <div class="right" style="color: white;">
                     <div class="nav">
-                        <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>Reports</span>
+                        <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>Income generated</span>
                     </div>
                     <div class="incoming">
-                        
+                        <div class="till inc">
+                            <div class="header">
+                                <h3>All Time Income Generated</h3>
+                            </div>
+                            <div class="body">
+                                <h3>Tsh. <%= mapato.zote.toLocaleString('en-us') %>/= </h3>
+                                <h3 class="desc">Total parking charge collected till date - <span class="adt">⏳</span></h3>
+                                <div class="progress" style="height: 30px;">
+                                    <div class="progress-bar" id="zote" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="todays inc">
+                            <div class="header">
+                                <h3>Today's Income Generated</h3>
+                            </div>
+                            <div class="body">
+                                <h3>Tsh. <%= mapato.leo.toLocaleString('en-us') %>/= </h3>
+                                <h3 class="desc">Today's total parking charge collection - <span class="adt">⏳</span></h3>
+                                <div class="progress" style="height: 30px;">
+                                    <div class="progress-bar" id="leo" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                            </div>
+                        </div>
+
+                        <div class="yesterday inc">
+                            <div class="header">
+                                <h3>Yesterday's Income Generated</h3>
+                            </div>
+                            <div class="body">
+                                <h3>Tsh. <%= mapato.jana.toLocaleString('en-us') %>/= </h3>
+                                <h3 class="desc">Yesterday's total parking charges collected - <span id="yday">⏳</span></h3>
+                                <div class="progress" style="height: 30px;">
+                                    <div class="progress-bar" id="jana" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                            </div>
+                        </div>
                     </div>
+                    <%- include('../a-global/footer.ejs'); %>
                 </div>
         </div>
 

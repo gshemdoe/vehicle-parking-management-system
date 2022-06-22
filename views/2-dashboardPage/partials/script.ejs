@@ -1,4 +1,15 @@
 <script>
     const profile = document.querySelector('.profile')
     const pModal = document.querySelector('.pmodal')
+
+    var greeting = document.querySelector('.greeting')
+
+    var x = new Date()
+    if(x.getHours() > 11 && x.getHours < 16) {
+       greeting.innerText = 'Good Afternoon! Admin'
+    } else if(x.getHours() < 12) {
+        greeting.innerText = 'Good Morning! Admin'
+    } else {
+        greeting.innerText = 'Good Evening! Admin'
+    }
 </script>
