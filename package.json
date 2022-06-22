@@ -4,7 +4,8 @@
   "description": "Vehicle Parking Management System For MoCU Final Year Project By Shemdoe",
   "main": "index.js",
   "scripts": {
-    "shemdoe": "nodemon index.js"
+    "shemdoe": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "shemdoe",
   "license": "MIT",
