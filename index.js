@@ -19,4 +19,4 @@ app.use(getRoutes)
 app.use(postRoutes)
 
 
-app.listen(3000, ()=> console.log('✔ System imeunganishwa na port 3000,'))
+app.listen(process.env.PORT || 3000, ()=> console.log('✔ System imeunganishwa na port 3000,'))
