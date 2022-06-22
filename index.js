@@ -3,8 +3,10 @@ const mongoose = require('mongoose')
 const getRoutes = require('./routes/getRoutes')
 const postRoutes = require('./routes/postRoutes')
 
+require('dotenv').config()
+
 const app = express()
-mongoose.connect('mongodb://localhost/vehicle-parking')
+mongoose.connect(process.env.mongo)
 .then(()=> console.log('✔ Umeunganishwa na database kikamilifu'))
 .catch((err)=> console.log(err.message))
 
