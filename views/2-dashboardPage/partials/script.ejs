@@ -5,11 +5,11 @@
     var greeting = document.querySelector('.greeting')
 
     var x = new Date()
-    if(x.getHours() > 11 && x.getHours < 16) {
+    if(x.getHours() > 11) {
        greeting.innerText = 'Good Afternoon! Admin'
     } else if(x.getHours() < 12) {
         greeting.innerText = 'Good Morning! Admin'
-    } else {
+    } else if (hours > 15) {
         greeting.innerText = 'Good Evening! Admin'
     }
 </script>
