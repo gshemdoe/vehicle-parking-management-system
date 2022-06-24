@@ -68,20 +68,10 @@
         document.getElementById('comment').value = remark
         let leftDate = new Date(createdAt)
         document.getElementById('lefton').value =  leftDate.toLocaleDateString()+' at '+leftDate.toLocaleTimeString('en-us')
-
-        document.getElementById('release').setAttribute('onclick', `outDelete('${id}')`)
     }
 
 
     async function printingOut() {
         window.print()
-    }
-
-    async function outDelete(id) {
-        let con = confirm('Do you really want to delete this record?\n\nNote: It will be deleted permanently')
-
-        if(con == true) {
-            window.open(`/delete-out/${id}`, '_self')
-        } 
     }
 </script>

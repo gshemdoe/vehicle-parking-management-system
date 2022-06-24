@@ -1,0 +1,58 @@
+<script>
+    let mchange = document.getElementById('mchange')
+    let modalSpinner = document.querySelector('.modalSpinner')
+    let modalBody = document.querySelector('.modal-body')
+    let exampleModal = document.getElementById('exampleModal')
+    let exampleModalLabel = document.getElementById('exampleModalLabel')
+
+    mchange.addEventListener('click', async () => {
+        let coname = document.getElementById('coname').value
+        let coemail = document.getElementById('coemail').value
+        let address = document.getElementById('address').value
+        let website = document.getElementById('website').value
+        let mtarget = document.getElementById('mtarget').value
+        let dtarget = document.getElementById('dtarget').value
+        let myModal = new bootstrap.Modal(exampleModal)
+
+
+        if(!dtarget || !mtarget) {
+            return alert('One of the target is not a number... please insert number')
+        }
+        let data = { coname, coemail, address, website, dtarget, mtarget }
+        let res = await fetch('/settings-change', {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (res.status == 200) {
+            console.log('Data changed successfully')
+            myModal.show()
+            setTimeout(() => {
+                modalSpinner.style.display = 'none'
+                modalBody.style.display = 'block'
+                exampleModalLabel.innerText = "✔ DETAILS CHANGED"
+            }, 700)
+        }
+    })
+
+    let liveDt = document.getElementById('dtarget')
+    let liveMt = document.getElementById('mtarget')
+
+    liveDt.addEventListener('input', ()=> {
+        let dts = document.getElementById('dts')
+        let valuedt = document.getElementById('dtarget').value
+        dts.innerText = `👉 Tsh. ${Number(valuedt).toLocaleString('en-us')}/=`
+    })
+
+    liveMt.addEventListener('input', ()=> {
+        let mts = document.getElementById('mts')
+        let valuedt = document.getElementById('mtarget').value
+        mts.innerText = `👉 Tsh. ${Number(valuedt).toLocaleString('en-us')}/=`
+    })
+
+
+</script>

@@ -21,12 +21,68 @@
                     <div class="nav">
                         <i class="fa-solid fa-house-user"></i>&nbsp; / &nbsp;<span>Profile</span>
                     </div>
-                    
+                    <div class="bsec">
+                        <div class="title">
+                            Profile
+                        </div>
+                        <div class="body">
+                            <div class="g1 gp">
+                                <div class="i1 inpt">
+                                    <label for="fname">Full Name</label>
+                                    <input type="text" id="fname" name="fname" value="<%= info.fname %>">
+                                </div>
+                                <div class="i2 inpt">
+                                    <label for="uname">Username</label>
+                                    <input type="text" id="uname" name="uname" value="<%= info.username %>">
+                                </div>
+                            </div>
+                            <div class="g2 gp">
+                                <div class="i1 inpt">
+                                    <label for="fname">Email</label>
+                                    <input type="email" id="email" name="email" value="<%= info.email %>">
+                                </div>
+                                <div class="i2 inpt">
+                                    <label for="contact">Contact Number</label>
+                                    <input type="tel" id="contact" name="contact" value="<%= info.contact %>">
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button id="mchange">Make Changes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bsec">
+                        <div class="title">
+                            Password
+                        </div>
+                        <div class="body">
+                            <div class="g1 gp">
+                                <div class="i1 inpt">
+                                    <label for="pd">Current Password</label>
+                                    <input type="password" id="pd" name="password" autocomplete="new-password">
+                                    <div class="check check1">
+                                        <input type="checkbox"> <span style="display: inline-block;"> show password</span>
+                                    </div>
+                                </div>
+                                <div class="i2 inpt">
+                                    <label for="npd">New Password</label>
+                                    <input type="password" id="npd" name="npassword" autocomplete="new-password">
+                                    <div class="check check2">
+                                        <input type="checkbox"> <span style="display: inline-block;"> show password</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <button id="pchange">Make Changes</button>
+                            </div>
+                        </div>
+                    </div>
                     <%- include('../a-global/footer.ejs'); %>
                 </div>
         </div>
-
-
+         <!-- modal -->
+         <%- include('./partials/modal.ejs'); %>
 
 
 

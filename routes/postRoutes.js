@@ -1,19 +1,20 @@
 const mongoose = require('mongoose')
 const router = require('express').Router()
 const adminModel = require('../model/admin')
+const companyModel = require('../model/company')
 const categoryModel = require('../model/vehicle-category')
 const entryModel = require('../model/ventry')
 const totalModel = require('../model/totalv')
 const outModel = require('../model/vout')
 
-router.post('/login', async (req, res, next)=> {
+router.post('/login', async (req, res, next) => {
     try {
         const username = req.body.user
         const password = req.body.pass
 
-        let admin = await adminModel.findOne({ username, password})
-        if(admin) {
-            await admin.updateOne({isLogin: true})
+        let admin = await adminModel.findOne({ username })
+        if (admin && admin.password == password) {
+            await admin.updateOne({ isLogin: true })
             res.redirect('/dashboard')
         }
         else {
@@ -25,7 +26,7 @@ router.post('/login', async (req, res, next)=> {
     }
 })
 
-router.post('/category', async (req, res)=> {
+router.post('/category', async (req, res) => {
     const price = req.body.price
     const cname = req.body.category
 
@@ -41,19 +42,19 @@ router.post('/category', async (req, res)=> {
 
 })
 
-router.post('/edit-category/:id', async (req, res)=> {
+router.post('/edit-category/:id', async (req, res) => {
     const id = req.params.id
     const price = req.body.price
     const cname = req.body.category
 
     try {
-        if(price.length > 0 && cname.length < 1) {
-            await categoryModel.findByIdAndUpdate(id, {price})
+        if (price.length > 0 && cname.length < 1) {
+            await categoryModel.findByIdAndUpdate(id, { price })
         }
-        else if(price.length < 1 && cname.length > 0) {
-            await categoryModel.findByIdAndUpdate(id, {cname})
+        else if (price.length < 1 && cname.length > 0) {
+            await categoryModel.findByIdAndUpdate(id, { cname })
         } else {
-            await categoryModel.findByIdAndUpdate(id, {price, cname})
+            await categoryModel.findByIdAndUpdate(id, { price, cname })
         }
         res.redirect('/vehicle-category')
     } catch (error) {
@@ -64,7 +65,7 @@ router.post('/edit-category/:id', async (req, res)=> {
 
 })
 
-router.post('/vehicle-entry', async (req, res)=> {
+router.post('/vehicle-entry', async (req, res) => {
     let regno = req.body.regno
     let vname = req.body.vname
     let rawCname = req.body.cname
@@ -79,7 +80,7 @@ router.post('/vehicle-entry', async (req, res)=> {
         await entryModel.create({
             regno, vname, cname, oname, contact, pnum, price, status: 'in'
         })
-        await totalModel.findByIdAndUpdate('62700395de0f2c6379f2eff9', {$inc: {total: 1}})
+        await totalModel.findByIdAndUpdate('62700395de0f2c6379f2eff9', { $inc: { total: 1 } })
         console.log('Vehicle added to database successfully')
         res.redirect('/in-vehicles')
     } catch (error) {
@@ -108,13 +109,63 @@ router.post('/vehicle-out/:id', async (req, res) => {
         }
 
         await outModel.create(doc)
-        await entryModel.findByIdAndUpdate(id, {status: 'out'})
+        await entryModel.findByIdAndUpdate(id, { status: 'out' })
         console.log('doc updated from in to out')
         res.sendStatus(200)
     } catch (error) {
         console.log(error.message)
     }
 
+})
+
+router.post('/account-changes', async (req, res) => {
+    const fname = req.body.fname
+    const contact = req.body.contact
+    const username = req.body.username
+    const email = req.body.email
+
+    try {
+        await adminModel.findOneAndUpdate({ pid: 'shemdoe' }, { fname, contact, email, username })
+        console.log('Taarifa za admin zimebadilishwa kikamilifu')
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+
+router.post('/change-pass', async (req, res) => {
+    const pd = req.body.pd
+    const npd = req.body.npd
+
+    try {
+        let info = await adminModel.findOne({ username: 'admin' })
+        if (info.password == pd) {
+            await adminModel.findOneAndUpdate({ username: 'admin' }, { password: npd })
+            console.log('Password zimebadilishwa kikamilifu')
+            res.sendStatus(200)
+        } else {
+            res.sendStatus(201)
+        }
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+
+router.post('/settings-change', async (req, res) => {
+    const coname = req.body.coname
+    const coemail = req.body.coemail
+    const address = req.body.address
+    const website = req.body.website
+    const mtarget = req.body.mtarget
+    const dtarget = req.body.dtarget
+
+    try {
+        await companyModel.findOneAndUpdate({ pid: 'shemdoe' }, { coemail, coname, address, website, mtarget, dtarget })
+        console.log('Taarifa za kampuni zimebadilishwa kikamilifu')
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err.message)
+    }
 })
 
 module.exports = router

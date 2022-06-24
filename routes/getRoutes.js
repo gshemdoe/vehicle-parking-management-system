@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const router = require('express').Router()
 const adminModel = require('../model/admin')
+const companyModel = require('../model/company')
 const loginCheck = require('../fns/loginCheck')
 const { append } = require('express/lib/response')
 const categoryModel = require('../model/vehicle-category')
@@ -11,17 +12,32 @@ const totalModel = require('../model/totalv')
 const { startOfYesterday, endOfYesterday, startOfDay, endOfDay, startOfWeek, endOfWeek, endOfISOWeek, startOfISOWeek, startOfMonth, endOfMonth } = require('date-fns')
 
 //Create Admin
-router.get('/create', (req, res) => {
-    adminModel.create({
+router.get('/create', async (req, res) => {
+    await adminModel.create({
         username: 'admin',
-        email: 'shemdoe5654@gmail.com',
-        password: 'pass123'
-    }).then(() => res.send('Admin created successfully'))
+        email: 'admin@gmail.com',
+        fname: 'George Mariki',
+        contact: '0745685079',
+        password: 'pass123',
+        pid: 'shemdoe',
+        isLogin: 'false'
+    })
+
+    await companyModel.create({
+        coname: '31 Group Car Parking',
+        coemail: 'group.no.31@gmail.com',
+        address: '25103 Rau Moshi Kilimanjaro, Tanzania',
+        website: 'www.group-no-31.com',
+        dtarget: 150000,
+        mtarget: 3000000,
+        pid: 'shemdoe'
+    })
+    res.send('Admin and Company created successfully')
 })
 
 router.get('/', async (req, res) => {
     try {
-        let user = await adminModel.findOne({ username: 'admin' })
+        let user = await adminModel.findOne({ pid: 'shemdoe' })
         if (user.isLogin == false) {
             res.render('1-loginPage/login')
         } else {
@@ -145,7 +161,14 @@ router.get('/total-income', loginCheck, async (req, res)=> {
     let kiasiChaLeo = 0
     let kiasoChaJana = 0
 
-    let docs = await outModel.find()
+    let target = await companyModel.findOne({pid: 'shemdoe'})
+
+    let docs = await outModel.find({
+        createdAt: {
+            $gte: startOfMonth(new Date()),
+            $lte: endOfMonth(new Date())
+        }
+    })
 
     let today = await outModel.find({
         createdAt: {
@@ -174,18 +197,24 @@ router.get('/total-income', loginCheck, async (req, res)=> {
         leo: kiasiChaLeo,
         jana: kiasoChaJana,
         zote: kiasiChote,
-        leoAss: (kiasiChaLeo/150000)*100,
-        janaAss: (kiasoChaJana/150000)*100,
-        zoteAss: (kiasiChote/5000000)*100
+        leoAss: (kiasiChaLeo/Number(target.dtarget))*100,
+        janaAss: (kiasoChaJana/Number(target.dtarget))*100,
+        zoteAss: (kiasiChote/Number(target.mtarget))*100
     } })
 })
 
 router.get('/account', loginCheck, async (req, res)=> {
-    res.render('8-account/account')
+    let info = await adminModel.findOne({pid: 'shemdoe'})
+    res.render('8-account/account', {info})
+})
+
+router.get('/settings', loginCheck, async (req, res)=> {
+    let info = await companyModel.findOne({pid: 'shemdoe'})
+    res.render('9-settings/settings', {info})
 })
 
 router.get('/logout', async (req, res)=> {
-    await adminModel.findOneAndUpdate({username: 'admin'}, {isLogin: false})
+    await adminModel.findOneAndUpdate({pid: 'shemdoe'}, {isLogin: false})
     res.redirect('/')
 })
 module.exports = router

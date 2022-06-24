@@ -1,3 +1,90 @@
 <script>
-    
+    let mchange = document.getElementById('mchange')
+    let pchange = document.getElementById('pchange')
+    let modalSpinner = document.querySelector('.modalSpinner')
+    let modalBody = document.querySelector('.modal-body')
+    let exampleModal = document.getElementById('exampleModal')
+    let exampleModalLabel = document.getElementById('exampleModalLabel')
+
+    mchange.addEventListener('click', async () => {
+        let fname = document.getElementById('fname').value
+        let contact = document.getElementById('contact').value
+        let email = document.getElementById('email').value.trim()
+        let username = document.getElementById('uname').value.trim()
+        let myModal = new bootstrap.Modal(exampleModal)
+
+
+        let data = { fname, contact, email, username }
+        let res = await fetch('/account-changes', {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        if (res.status == 200) {
+            console.log('Data changed successfully')
+            myModal.show()
+            setTimeout(() => {
+                modalSpinner.style.display = 'none'
+                modalBody.style.display = 'block'
+                exampleModalLabel.innerText = "✔ CHANGED"
+            }, 700)
+        }
+    })
+
+    pchange.addEventListener('click', async () => {
+        let pd = document.getElementById('pd').value
+        let npd = document.getElementById('npd').value
+        let myModal = new bootstrap.Modal(exampleModal)
+
+        let data = { pd, npd }
+        let res = await fetch('/change-pass', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        if (res.status == 200) {
+            console.log('Password changed successfully')
+            myModal.show()
+            setTimeout(() => {
+                modalSpinner.style.display = 'none'
+                modalBody.style.display = 'block'
+                exampleModalLabel.innerText = "✔ PASSWORD CHANGED"
+                document.getElementById('pd').value = ''
+                document.getElementById('npd').value = ''
+            }, 700)
+        } else if (res.status == 201) {
+            alert('Password not changed, Current password is not correct.')
+        }
+    })
+
+    let check1 = document.querySelector('.check1')
+    let check2 = document.querySelector('.check2')
+
+    let pd = document.getElementById('pd')
+    let npd = document.getElementById('npd')
+
+    check1.addEventListener('change', ()=> {
+        if(pd.type === 'password') {
+            pd.type = 'text'
+        } else {
+            pd.type = 'password'
+        }
+    })
+
+    check2.addEventListener('change', ()=> {
+        if(npd.type === 'password') {
+            npd.type = 'text'
+        } else {
+            npd.type = 'password'
+        }
+    })
+
+
 </script>

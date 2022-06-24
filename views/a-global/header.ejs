@@ -11,7 +11,7 @@
         <div class="pmodal">
             <ul>
                 <li class="myacc" id="accountLink"><i class="fa-solid fa-user"></i> &nbsp; Profile</li>
-                <li class="settings"><i class="fa-solid fa-screwdriver-wrench"></i> &nbsp; Settings</li>
+                <li class="settings" id="settingLink"><i class="fa-solid fa-screwdriver-wrench"></i> &nbsp; Settings</li>
                 <li class="logout" title="Logout" onclick="window.open('/logout', '_self')"><i class="fa-solid fa-power-off"></i></li>
             </ul>
         </div>
@@ -21,5 +21,9 @@
 <script>
 document.getElementById('accountLink').addEventListener('click', ()=> {
     window.open('/account', '_self')
+})
+
+document.getElementById('settingLink').addEventListener('click', ()=> {
+    window.open('/settings', '_self')
 })
 </script>

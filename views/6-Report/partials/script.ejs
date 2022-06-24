@@ -19,6 +19,8 @@
         var tbody = document.getElementById('tbody')
         var spinner = document.getElementById('spinner')
         var nothing = document.getElementById('nothing')
+        var total1 = document.getElementById('ttt')
+        var total2 = document.getElementById('tt')
 
         if (from && to) {
             tbody.innerHTML = ''
@@ -36,6 +38,8 @@
                         tr.innerHTML = `<th scope="row">${index + 1}</th> <td>${v.regno}</td> <td>${v.cname}</td> <td>${v.oname}</td> <td>Tsh. ${Number(v.pesa).toLocaleString('en-us')}/=</td>`
                         tbody.appendChild(tr)
                         spinner.style.setProperty('display', 'none', 'important')
+                        total1.innerText = data.length
+                        total2.innerText = data.length
                     }, 1000)
                 })
             }
