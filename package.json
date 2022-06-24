@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "shemdoe": "nodemon index.js",
-    "start": "nodemon index.js"
+    "abdallah": "nodemon index.js",
+    "bahati": "nodemon index.js",
+    "kulwa": "nodemon index.js",
+    "isack": "nodemon index.js"
   },
   "author": "shemdoe",
   "license": "MIT",
