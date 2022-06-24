@@ -138,9 +138,9 @@ router.post('/change-pass', async (req, res) => {
     const npd = req.body.npd
 
     try {
-        let info = await adminModel.findOne({ username: 'admin' })
+        let info = await adminModel.findOne({ pid: 'shemdoe' })
         if (info.password == pd) {
-            await adminModel.findOneAndUpdate({ username: 'admin' }, { password: npd })
+            await adminModel.findOneAndUpdate({ pid: 'shemdoe' }, { password: npd })
             console.log('Password zimebadilishwa kikamilifu')
             res.sendStatus(200)
         } else {
